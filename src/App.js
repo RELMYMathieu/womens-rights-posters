@@ -241,7 +241,7 @@ const PoliticalPoster = () => (
       </div>
       
       <div className="mt-6 p-4 border-l-4 border-rose-600 bg-white bg-opacity-70 rounded-lg">
-        <p className="italic" style={{ fontFamily: "'Helvetica Neue', sans-serif" }}>"Le chemin de l'égalité est long, mais notre détermination à le parcourir est sans faille."</p>
+        <p className="italic" style={{ fontFamily: "'Helvetica Neue', sans-serif" }}>"Ma revendication en tant que femme c'est que ma différence soit prise en compte, que je ne sois pas contrainte de m'adapter au modèle masculin."</p>
         <p className="text-right font-bold text-rose-800" style={{ fontFamily: "'Helvetica Neue', sans-serif" }}>— Simone Veil</p>
       </div>
     </div>
