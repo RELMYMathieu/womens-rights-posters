@@ -2,12 +2,35 @@ import React, { useState, useEffect } from 'react';
 import WorkPoster from './components/WorkPoster';
 import PoliticalPoster from './components/PoliticalPoster';
 import StereotypesPoster from './components/StereotypesPoster';
+import Footer from './components/Footer';
 
 function App() {
   const [selectedPoster, setSelectedPoster] = useState(0);
   const [previousPoster, setPreviousPoster] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  // Background image URLs to preload
+  const imageUrls = [
+    'https://tbcdn.talentbrew.com/company/27326/28708/content/WINS%20Illustration.jpg',
+    'https://fortune.com/img-assets/wp-content/uploads/2019/09/POL1019.Women-in-Politics-List-2019.jpg',
+    'https://www.letadlanaplatne.cz/wp-content/uploads/2022/08/We-Can-Do-It.jpg',
+    // Poster specific images
+    'https://i.imgur.com/ADfKNU6.png', // Work poster graph
+    'https://i.imgur.com/zugPtvD.png'  // Politics poster image
+  ];
+  
+  // Preload images
+  useEffect(() => {
+    const preloadImages = () => {
+      imageUrls.forEach((url) => {
+        const img = new Image();
+        img.src = url;
+      });
+    };
+    
+    preloadImages();
+  }, []);
   
   // Scroll to top on initial load
   useEffect(() => {
@@ -146,6 +169,11 @@ function App() {
             {selectedPoster === 1 && <PoliticalPoster />}
             {selectedPoster === 2 && <StereotypesPoster />}
           </div>
+        </div>
+        
+        {/* Footer component */}
+        <div className="mt-8">
+          <Footer />
         </div>
       </div>
     </div>
