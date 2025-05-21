@@ -4,26 +4,26 @@ import PoliticalPoster from './components/PoliticalPoster';
 import StereotypesPoster from './components/StereotypesPoster';
 import Footer from './components/Footer';
 
+// Define image URLs outside the component to avoid re-creation on each render
+const IMAGE_URLS = [
+  'https://tbcdn.talentbrew.com/company/27326/28708/content/WINS%20Illustration.jpg',
+  'https://fortune.com/img-assets/wp-content/uploads/2019/09/POL1019.Women-in-Politics-List-2019.jpg',
+  'https://www.letadlanaplatne.cz/wp-content/uploads/2022/08/We-Can-Do-It.jpg',
+  // Poster specific images
+  'https://i.imgur.com/ADfKNU6.png', // Work poster graph
+  'https://i.imgur.com/zugPtvD.png'  // Politics poster image
+];
+
 function App() {
   const [selectedPoster, setSelectedPoster] = useState(0);
   const [previousPoster, setPreviousPoster] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   
-  // Background image URLs to preload
-  const imageUrls = [
-    'https://tbcdn.talentbrew.com/company/27326/28708/content/WINS%20Illustration.jpg',
-    'https://fortune.com/img-assets/wp-content/uploads/2019/09/POL1019.Women-in-Politics-List-2019.jpg',
-    'https://www.letadlanaplatne.cz/wp-content/uploads/2022/08/We-Can-Do-It.jpg',
-    // Poster specific images
-    'https://i.imgur.com/ADfKNU6.png', // Work poster graph
-    'https://i.imgur.com/zugPtvD.png'  // Politics poster image
-  ];
-  
   // Preload images
   useEffect(() => {
     const preloadImages = () => {
-      imageUrls.forEach((url) => {
+      IMAGE_URLS.forEach((url) => {
         const img = new Image();
         img.src = url;
       });
@@ -66,15 +66,15 @@ function App() {
   
   const backgroundStyles = [
     { 
-      backgroundImage: "url('https://tbcdn.talentbrew.com/company/27326/28708/content/WINS%20Illustration.jpg')",
+      backgroundImage: `url('${IMAGE_URLS[0]}')`,
       backgroundColor: "rgba(79, 70, 229, 0.2)" // indigo tint
     },
     { 
-      backgroundImage: "url('https://fortune.com/img-assets/wp-content/uploads/2019/09/POL1019.Women-in-Politics-List-2019.jpg')",
+      backgroundImage: `url('${IMAGE_URLS[1]}')`,
       backgroundColor: "rgba(225, 29, 72, 0.2)" // rose tint
     },
     { 
-      backgroundImage: "url('https://www.letadlanaplatne.cz/wp-content/uploads/2022/08/We-Can-Do-It.jpg')",
+      backgroundImage: `url('${IMAGE_URLS[2]}')`,
       backgroundColor: "rgba(217, 119, 6, 0.2)" // amber tint
     }
   ];
