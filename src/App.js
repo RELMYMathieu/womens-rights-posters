@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import WorkPoster from './components/WorkPoster';
 import PoliticalPoster from './components/PoliticalPoster';
 import StereotypesPoster from './components/StereotypesPoster';
@@ -19,6 +19,11 @@ function App() {
   const [previousPoster, setPreviousPoster] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  // Add a ref to track the last transition time
+  const lastTransitionTime = useRef(0);
+  // Minimum time (in ms) between transitions
+  const transitionCooldown = 700;
   
   // Preload images
   useEffect(() => {
@@ -46,10 +51,22 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
   
-  // Handle poster transitions
+  // Handle poster transitions with debounce
   const handleChangePoster = (newPoster) => {
+    const now = Date.now();
+    
+    // Return if it's the same poster or a transition is in progress
     if (selectedPoster === newPoster || isTransitioning) return;
     
+    // Check if enough time has passed since the last transition
+    if (now - lastTransitionTime.current < transitionCooldown) {
+      return; // Ignore rapid clicks
+    }
+    
+    // Update the last transition time
+    lastTransitionTime.current = now;
+    
+    // Start transition
     setIsTransitioning(true);
     setPreviousPoster(selectedPoster);
     
